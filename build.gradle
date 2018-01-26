@@ -1,0 +1,47 @@
+buildscript {
+    ext.kotlin_version = '1.2.21'
+
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    group = 'com.spectralogic.kotlin-utils'
+    version = '0.0.1'
+}
+
+subprojects {
+    apply plugin: 'kotlin'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+        testCompile "org.assertj:assertj-core:3.8.0"
+        testCompile 'junit:junit:4.12'
+        testCompile 'io.kotlintest:kotlintest:1.1.1'
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5'
+}
