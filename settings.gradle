@@ -1,1 +1,1 @@
-include 'guava'
+include 'guava', 'core'
